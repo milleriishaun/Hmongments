@@ -17,4 +17,3 @@ def get_sub_domain_name(url):
         return urlparse(url).netloc #network location is returned
     except:
         return '' #have to return something
-
