@@ -9,7 +9,7 @@ def create_project_dir(directory):
 create_project_dir('googlenews')
 
 # Create queued and crawled files(if not already made)
-def create_data_files(project_name, base_url):
+def create_data_file(project_name, base_url):
     queue = project_name + '/queue.txt'
     crawled = project_name + '/crawled.txt'
     if not os.path.isfile(queue):

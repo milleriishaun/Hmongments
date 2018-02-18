@@ -40,4 +40,5 @@ class Spider:
             Spider.crawled.add(page_url)
             Spider.update_files()
 
-    
+    @staticmethod
+    def gather_links()
