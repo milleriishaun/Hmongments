@@ -18,14 +18,14 @@ Spider(PROJECT_NAME, HOMEPAGE, DOMAIN_NAME)
 # Eahc queued link is a new job
 def create_jobs():
     for link in file_to_set(QUEUE_FILE):
-        queue.pu(link)
+        queue.put(link)
     # hey Spider, wait your turn
     queue.join()
     crawl()
 
 # Create worker threads (will die when main exits)
 def create_workers():
-    for _ in range(NUMBER_OF_THREADS)
+    for _ in range(NUMBER_OF_THREADS):
         t = threading.thread(target=work)
         t.daemon = True
         t.start()
@@ -42,7 +42,7 @@ def work():
 
 # Check if there are items in the queue, if so crawl them
 def crawl():
-    queued _links = file_to_set(QUEUE_FILE)
+    queued_links = file_to_set(QUEUE_FILE)
     if len(queued_links) > 0:
         print(str(len(queued_links)) + ' links in the queue')
         create_jobs()
