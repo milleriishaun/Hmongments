@@ -41,4 +41,30 @@ class Spider:
             Spider.update_files()
 
     @staticmethod
-    def gather_links()
+    # Function to connect to site,
+    # takes html, converts proper string 
+    # passes it on to LinkFinder,
+    # gets a set of all the URLs and then
+    # the list of the URLs can be manipulated thereafter
+    def gather_links(page_url):
+        # store string after decode bytes
+        html_string = ''
+        # whenever doing network or server operation,
+        # run it within a try/except model
+        try:
+            response = urlopen(page_url)
+            # check if HTML file, rather than pdf or something
+            if response.getheader('Content-Type') == 'text/html':
+                # bytes from the ethernet cable
+                html_bytes = response.read()
+                html_string = html_bytes.decode("utf-8")
+            finder = LinkFinder(Spider.base_url, page_url)
+            finder.feed(html_string)
+        except:
+            # what if connecting to a lin to page that isn't there anymore
+            # we don't want to crash program, just push error
+            print('Error: can not crawl page')
+            # just return set, which is empty
+            return set()
+        return finder.page_links()
+
