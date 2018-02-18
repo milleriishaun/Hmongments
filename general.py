@@ -30,7 +30,21 @@ def append_to_file(path, data):
 
 # this is creating a new file which will delete it
 # Delete the contents of a file
-def delete_file_content(path):
+def delete_file_contents(path):
     with open(path, 'w'):
         pass #do nothing
+
+# Read a file and convert each line to set items
+def file_to_set(file_name)
+    results = set()
+    with open(file_name, 'rt') as f:
+        for line in f:
+            results.add(line.replace('\n', ''))
+    return results
+
+# Iterate through a set. Eache item will be a new line in the file
+def set_to_file(links, file):
+    delete_file_contents(file)
+    for link in sorted(links):
+        append_to_file(file, link)
 
