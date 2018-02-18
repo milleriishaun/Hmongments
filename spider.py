@@ -1,5 +1,6 @@
 from urllib.request import urlopen
 from link_finder import LinkFinder
+from domain import *
 from general import *
 
 
@@ -26,7 +27,7 @@ class Spider:
     @staticmethod
     def boot(self):
         create_project_dir(Spider.project_name)
-        create_data_file(Spider.project_name, Spider.base_url)
+        create_data_files(Spider.project_name, Spider.base_url)
         Spider.queue = file_to_set(Spider.queue_file)
         Spider.crawled = file_to_set(Spider.crawled_file)
 
@@ -54,16 +55,16 @@ class Spider:
         try:
             response = urlopen(page_url)
             # check if HTML file, rather than pdf or something
-            if response.getheader('Content-Type') == 'text/html':
+            if 'text/html' in response.getheader('Content-Type'):
                 # bytes from the ethernet cable
                 html_bytes = response.read()
                 html_string = html_bytes.decode("utf-8")
             finder = LinkFinder(Spider.base_url, page_url)
             finder.feed(html_string)
-        except:
+        except Exception as e:
             # what if connecting to a lin to page that isn't there anymore
             # we don't want to crash program, just push error
-            print('Error: can not crawl page')
+            print(str(e))
             # just return set, which is empty
             return set()
         return finder.page_links()
@@ -71,12 +72,10 @@ class Spider:
     @staticmethod
     def add_links_to_queue(links):
         for url in links:
-            if url in Spider.queue:
-                continue
-            if url in Spider.crawled:
+            if (url in Spider.queue) or (url in Spider.crawled):
                 continue
             # don't crawl the entire internet
-            if Spider.domain_name not in url:
+            if Spider.domain_name != get_domain_name(url):
                 continue
             Spider.queue.add(url)
     
