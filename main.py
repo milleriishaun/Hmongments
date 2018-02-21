@@ -5,7 +5,7 @@ from domain import *
 from general import *
 
 PROJECT_NAME = 'Hmongments'
-HOMEPAGE = 'http://viper-seo.com/'
+HOMEPAGE = 'https://news.google.com/news/search/section/q/hmong/hmong?hl=en&gl=US&ned=us'
 DOMAIN_NAME = get_domain_name(HOMEPAGE)
 QUEUE_FILE = PROJECT_NAME + '/queue.txt'
 CRAWLED_FILE = PROJECT_NAME + '/crawled.txt'

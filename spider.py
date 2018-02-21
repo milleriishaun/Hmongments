@@ -2,7 +2,9 @@ from urllib.request import urlopen
 from link_finder import LinkFinder
 from domain import *
 from general import *
-
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class Spider:
 
@@ -24,7 +26,7 @@ class Spider:
         self.boot()
         self.crawl_page('First spider', Spider.base_url)
 
-    @staticmethod
+    
     def boot(self):
         create_project_dir(Spider.project_name)
         create_data_files(Spider.project_name, Spider.base_url)
