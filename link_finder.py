@@ -1,5 +1,7 @@
 from html.parser import HTMLParser
 from urllib import parse
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class LinkFinder(HTMLParser):
 
